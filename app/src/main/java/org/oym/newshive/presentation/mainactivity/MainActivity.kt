@@ -1,4 +1,4 @@
-package org.oym.newshive
+package org.oym.newshive.presentation.mainactivity
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
