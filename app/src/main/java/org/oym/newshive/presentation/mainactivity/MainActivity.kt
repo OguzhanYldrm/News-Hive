@@ -15,12 +15,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.oym.newshive.domain.usecases.AppEntryUseCases
 import org.oym.newshive.presentation.onboarding.OnBoardingScreen
+import org.oym.newshive.presentation.onboarding.OnBoardingViewModel
 import org.oym.newshive.ui.theme.NewsHiveTheme
 import javax.inject.Inject
 
@@ -28,7 +30,10 @@ import javax.inject.Inject
 class MainActivity : ComponentActivity() {
 
     @Inject
-    lateinit var appEntryUseCases: AppEntryUseCases
+    lateinit var useCases: AppEntryUseCases
+
+    @Inject
+    lateinit var onBoardingViewModel: OnBoardingViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,15 +41,17 @@ class MainActivity : ComponentActivity() {
         installSplashScreen()
 
         lifecycleScope.launch {
-            appEntryUseCases.readAppEntry().collect(){
-                Log.i("APP ENTRY STATUS", it.toString())
+            useCases.readAppEntry().collect{
+                Log.d("STATUS", it.toString())
             }
         }
 
         setContent {
             NewsHiveTheme {
                 Box(modifier = Modifier.background(color = MaterialTheme.colorScheme.background)) {
-                    OnBoardingScreen()
+                    OnBoardingScreen(
+                        event = onBoardingViewModel::onEvent
+                    )
                 }
             }
         }

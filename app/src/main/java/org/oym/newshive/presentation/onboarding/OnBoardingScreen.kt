@@ -36,7 +36,9 @@ import org.oym.newshive.ui.theme.NewsHiveTheme
  */
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun OnBoardingScreen() {
+fun OnBoardingScreen(
+    event: (OnBoardingEvent) -> Unit
+) {
     Column(modifier = Modifier.fillMaxSize()) {
         val pagerState = rememberPagerState(initialPage = 0) {
             pages.size
@@ -89,8 +91,9 @@ fun OnBoardingScreen() {
 
                 NewsButton(text = buttonState.value[1], onClick = {
                     scope.launch {
-                        if (pagerState.currentPage == 3) {
-                            //TODO : Navigate to Home
+                        if (pagerState.currentPage == 2) {
+                            event(OnBoardingEvent.SaveAppEntry)
+                            //TODO Navigate Home
                         } else {
                             pagerState.animateScrollToPage(
                                 page = pagerState.currentPage + 1
@@ -102,14 +105,5 @@ fun OnBoardingScreen() {
         }
 
         Spacer(modifier = Modifier.weight(0.5f))
-    }
-}
-
-
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_NO, showBackground = true)
-@Composable
-fun OnBoardingScreenPreview() {
-    NewsHiveTheme {
-        OnBoardingScreen()
     }
 }

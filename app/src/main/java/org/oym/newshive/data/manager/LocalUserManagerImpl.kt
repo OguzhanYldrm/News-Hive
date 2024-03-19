@@ -9,7 +9,6 @@ import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import org.oym.newshive.domain.manager.ILocalUserManager
-import org.oym.newshive.enums.EntryStatus
 import org.oym.newshive.util.Constants
 import org.oym.newshive.util.Constants.USER_SETTINGS
 
@@ -18,15 +17,15 @@ import org.oym.newshive.util.Constants.USER_SETTINGS
  */
 class LocalUserManagerImpl(private val context: Context) : ILocalUserManager {
 
-    override suspend fun saveAppEntry(entryStatus : EntryStatus) {
+    override suspend fun saveAppEntry() {
         context.dataStore.edit { settings ->
-            settings[PreferencesKeys.APP_ENTRY] = entryStatus.value
+            settings[PreferencesKeys.APP_ENTRY] = true
         }
     }
 
     override fun readAppEntry(): Flow<Boolean> {
         return context.dataStore.data.map { preferences ->
-            preferences[PreferencesKeys.APP_ENTRY] ?: EntryStatus.NOT_FIRST_TIME.value
+            preferences[PreferencesKeys.APP_ENTRY] ?: false
         }
     }
 
