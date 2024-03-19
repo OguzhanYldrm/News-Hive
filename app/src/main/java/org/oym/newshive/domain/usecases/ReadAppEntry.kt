@@ -8,7 +8,7 @@ import org.oym.newshive.domain.manager.ILocalUserManager
  */
 class ReadAppEntry(private val iLocalUserManager : ILocalUserManager) {
 
-    suspend operator fun invoke() : Flow<Boolean> {
+    operator fun invoke() : Flow<Boolean> {
         return iLocalUserManager.readAppEntry()
     }
 
