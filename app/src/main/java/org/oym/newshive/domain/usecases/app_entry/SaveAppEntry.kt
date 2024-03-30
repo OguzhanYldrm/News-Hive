@@ -1,4 +1,4 @@
-package org.oym.newshive.domain.usecases
+package org.oym.newshive.domain.usecases.app_entry
 
 import org.oym.newshive.domain.manager.ILocalUserManager
 

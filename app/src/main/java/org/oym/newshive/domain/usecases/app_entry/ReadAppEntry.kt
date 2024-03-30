@@ -1,4 +1,4 @@
-package org.oym.newshive.domain.usecases
+package org.oym.newshive.domain.usecases.app_entry
 
 import kotlinx.coroutines.flow.Flow
 import org.oym.newshive.domain.manager.ILocalUserManager

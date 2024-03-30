@@ -1,4 +1,4 @@
-package org.oym.newshive.domain.usecases
+package org.oym.newshive.domain.usecases.app_entry
 
 /**
  * Created by oguzhan.yildirim on 11.03.2024.

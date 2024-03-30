@@ -7,9 +7,9 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import org.oym.newshive.data.manager.LocalUserManagerImpl
 import org.oym.newshive.domain.manager.ILocalUserManager
-import org.oym.newshive.domain.usecases.AppEntryUseCases
-import org.oym.newshive.domain.usecases.ReadAppEntry
-import org.oym.newshive.domain.usecases.SaveAppEntry
+import org.oym.newshive.domain.usecases.app_entry.AppEntryUseCases
+import org.oym.newshive.domain.usecases.app_entry.ReadAppEntry
+import org.oym.newshive.domain.usecases.app_entry.SaveAppEntry
 import javax.inject.Singleton
 
 /**

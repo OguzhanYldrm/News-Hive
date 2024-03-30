@@ -1,8 +1,12 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+val key: String = gradleLocalProperties(rootDir).getProperty("NEWSKEY")
+
 plugins {
     id ("com.android.application")
     id ("org.jetbrains.kotlin.android")
     id ("kotlin-kapt")
     id ("com.google.dagger.hilt.android")
+    id ("kotlin-parcelize")
 }
 
 android {
@@ -23,7 +27,13 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField("String", "NEWSKEY", key)
+        }
+
         release {
+            buildConfigField("String", "NEWSKEY", key)
+
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -40,6 +50,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -96,6 +107,9 @@ dependencies {
 
     //Accompanist
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.32.0")
+
+    //Paging
+    implementation ("androidx.paging:paging-runtime-ktx:3.2.1")
 
 
     testImplementation("junit:junit:4.13.2")
